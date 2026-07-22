@@ -2,19 +2,35 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
-    container_name: gestion_meteo_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mto-backend
+    restart: always
     ports:
       - "3000:3000"
     volumes:
       - ./backend:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
+    networks:
+      - mto-network
 
   frontend:
-    build: ./frontend
-    container_name: gestion_meteo_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mto-frontend
+    restart: always
     ports:
-      - "5173:5173"
+      - "8080:80"
     volumes:
       - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - mto-network
+
+networks:
+  mto-network:
+    driver: bridge
