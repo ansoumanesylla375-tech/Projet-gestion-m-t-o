@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Perforation "billet" utilisée sur les cartes événement : élément signature du dashboard */
+.ticket-notch::before,
+.ticket-notch::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--notch-bg, #f6f7fb);
+  border-radius: 9999px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket-notch::before {
+  left: -8px;
+}
+.ticket-notch::after {
+  right: -8px;
+}
